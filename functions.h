@@ -11,9 +11,9 @@ int Puts (const char *str);
 @brief Used to find symbol in the string
 @param[out] String, in which you want to find symbol
 @param[in] Symbol, which you want to find
-@return number of symbol in the string
+@return Pointer to the found character in string, or null pointer if no such character is found.
 */
-int Strchr (const char *str, int ch);
+char *Strchr ( char *str, int ch);
 
 /**
 @brief Used to determine the length of a string
@@ -45,11 +45,21 @@ int Strncpy (char *str1, const char *str2, const int n);
 @param[out] String, in which you want to append second string
 @param[out] String, which you want to append
 */
-void Strcat (char *str1, const char *str2);
+char *Strcat (char *str1, const char *str2);
 
 /**
 @brief Used to append the first n symbols of the string string str2 to the end of the string str1
 @param[out] String, in which part you want to append second string
 @param[out] String, which you want to append
 */
-void Strncat (char *str1, const char *str2, const int n);
+char *Strncat (char *str1, const char *str2, const int n);
+
+/**
+@brief Used to compare two null-terminated byte strings lexicographically.
+@param[out] pointers to the first null-terminated byte strings to compare
+@param[out] pointers to the second null-terminated byte strings to compare
+@return Negative value if str1 appears before str2 in lexicographical order.
+@return Zero if str1 and str2 compare equal.
+@return Positive value if str1 appears after str2 in lexicographical order.
+*/
+int Strcmp (const char *str1, const char *str2);

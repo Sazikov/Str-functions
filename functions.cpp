@@ -5,40 +5,32 @@
 
 int Puts (const char *str)
 {
-    int i = 0;
-    char c;
-    while (true)
+
+    while (*str != '\0')
     {
-        c = str[i];
-        if (c == '\0')
-        {
-            printf("\n");
-            return 0;
-        }
-        printf("%c", c);
-        i += 1;
+        putchar(*str);
+        str++;
 
     }
-   return -1;
+   return 0;
 }
 
 
-
-int Strchr (const char *str, int ch)
+char *Strchr ( char *str, int ch)
 {
-    int i = 0;
-    while (true)
+
+    while (*str != '\0')
     {
-        //printf("%c", str[i]);
-        if (str[i] == ch) return i + 1;
-        i += 1;
+        if (*str == ch) return str;
+        str++;
     }
-    return -1;
+    return NULL;
 }
 
 int Strlen (const char *str)
 {
     int i = 0;
+
     while (str[i] != '\0')
     {
         i += 1;
@@ -49,18 +41,12 @@ int Strlen (const char *str)
 
 int Strcpy (char *str1, const char *str2)
 {
-    if (Strlen(str1) < Strlen(str2))
-    {
-        printf("The copied string is larger than destination string\n");
-        return -1;
-    }
-
     int i = 0;
     while (true)
     {
         str1[i] = str2[i];
         if (str2[i] == '\0') break;
-        i ++;
+        i++;
     }
     return 0;
 }
@@ -68,12 +54,6 @@ int Strcpy (char *str1, const char *str2)
 
 int Strncpy (char *str1, const char *str2, const int n)
 {
-    if (Strlen(str1) < Strlen(str2))
-    {
-        printf("The copied string is larger than destination string\n");
-        return -1;
-    }
-
     int len = Strlen(str2);
     for (int i = 0; i < n && i < len; i ++)
     {
@@ -82,8 +62,8 @@ int Strncpy (char *str1, const char *str2, const int n)
 
     if (len < n)
     {
-        int t = n - len;
-        for (int i = 0; i < t; i++)
+        int diff = n - len;
+        for (int i = 0; i < diff; i++)
         {
             str1[i] = '\0';
         }
@@ -92,35 +72,54 @@ int Strncpy (char *str1, const char *str2, const int n)
 }
 
 
-
-void Strcat ( char *str1, const char *str2)
+char *Strcat ( char *str1, const char *str2)
 {
-
     const int len2 = Strlen(str2);
     const int len1 = Strlen(str1);
+    char *result = str1;
 
     for (int i = 0; i < len2; i ++)
     {
-        str1[i + len1] = str2[i];
+        result[i + len1] = str2[i];
     }
+    return result;
 }
 
 
-void Strncat ( char *str1, const char *str2, const int n)
+char *Strncat ( char *str1, const char *str2, const int n)
 {
 
     const int len2 = Strlen(str2);
     const int len1 = Strlen(str1);
+    char *result = str1;
 
     for (int i = 0; i < len2 && i < n; i ++)
     {
-        str1[i + len1] = str2[i];
+        result[i + len1] = str2[i];
     }
     if (len2 < n)
     {
-        int t = n - len2;
-        for (int i = 0; i < t; i ++) str1[len1 + len2 + i] = '\0';
-     }
-
+        int diff = n - len2;
+        for (int i = 0; i < diff; i ++)
+            result[len1 + len2 + i] = '\0';
+    }
+    return result;
 }
 
+
+int Strcmp (const char *str1, const char *str2)
+{
+    while (*str1 != '\0' || *str2 != '\0')
+    {
+        if (*str1 != *str2)
+        {
+            return *str1 - *str2;
+        }
+        else
+        {
+            str1++;
+            str2++;
+        }
+    }
+    return 0;
+}
